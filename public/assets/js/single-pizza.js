@@ -16,20 +16,21 @@ function getPizza() {
 
   // get pizzaInfo
   fetch(`/api/pizzas/${pizzaId}`)
-  .then(response => {
-    // check for a 4xx or 5xx error from server
-    if (!response.ok) {
-      throw new Error({ message: 'Something went wrong!' });
-    }
+    .then(response => {
+      console.log(response);
+      if (!response.ok) {
+        console.log('hi');
+        throw new Error({ message: 'Something went wrong!' });
+      }
 
-    return response.json();
-  })
-  .then(printPizza)
-  .catch(err => {
-    console.log(err);
-    alert('Cannot find a pizza with this id! Taking you back.');
-    window.history.back();
-  });
+      return response.json();
+    })
+    .then(printPizza)
+    .catch(err => {
+      console.log(err);
+      alert('Cannot find a pizza with this id! Taking you back.');
+      window.history.back();
+    });
 }
 
 function printPizza(pizzaData) {
@@ -127,7 +128,7 @@ function handleNewCommentSubmit(event) {
     })
     .then(commentResponse => {
       console.log(commentResponse);
-      location.reload();
+      // location.reload();
     })
     .catch(err => {
       console.log(err);
@@ -172,9 +173,6 @@ function handleNewReplySubmit(event) {
     })
     .catch(err => {
       console.log(err);
-    });
-    $backBtn.addEventListener('click', function() {
-      window.history.back();
     });
 }
 
